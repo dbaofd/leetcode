@@ -71,9 +71,4 @@ public class GrayCode {
         }
         return result;
     }
-
-    public static void main(String[] args) {
-        GrayCode grayCode = new GrayCode();
-        grayCode.grayCode(3);
-    }
 }
