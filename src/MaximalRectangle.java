@@ -11,7 +11,7 @@ public class MaximalRectangle {
         int maxArea = 0;
         int currentArea = 0;
         int sum = 0;
-        int mergeNum = 1;
+        int mergeNum = 1;//start with merge one column, then two column.
         if (colNums == 0 && rowNums == 0)
             return 0;
         while (mergeNum <= colNums) {
