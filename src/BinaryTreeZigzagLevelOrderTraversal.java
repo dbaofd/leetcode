@@ -1,8 +1,11 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-public class BinaryTreeLevelOrderTraversal {
-    public List<List<Integer>> levelOrder(TreeNode root) {
+
+public class BinaryTreeZigzagLevelOrderTraversal {
+    //    Runtime: 1 ms, faster than 75.26% of Java online submissions for Binary Tree Zigzag Level Order Traversal.
+//    Memory Usage: 38.9 MB, less than 36.09% of Java online submissions for Binary Tree Zigzag Level Order Traversal.
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> myList = new ArrayList<>();
         if (root == null)
             return myList;
@@ -33,6 +36,17 @@ public class BinaryTreeLevelOrderTraversal {
                 myQueue.offer(node.right);
                 levelIndexQueue.offer(levelIndex + 1);
             }
+        }
+        int count = 1;
+        for (List<Integer> li : myList) {
+            if (count % 2 == 0) {//change the direction.
+                for (int i = 0, j = li.size() - 1; i < li.size() / 2; i++, j--) {
+                    int temp = li.get(i);
+                    li.set(i, li.get(j));
+                    li.set(j, temp);
+                }
+            }
+            count++;
         }
         return myList;
     }
