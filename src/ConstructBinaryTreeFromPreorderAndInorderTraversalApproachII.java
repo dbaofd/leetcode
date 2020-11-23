@@ -24,7 +24,6 @@ public class ConstructBinaryTreeFromPreorderAndInorderTraversalApproachII {
         }
         if (nodeIndexOfInorder > inStart && nodeIndexOfInorder < inEnd) {
             int leftTreeSize = nodeIndexOfInorder - inStart;
-            int rightTreeSize = inEnd - nodeIndexOfInorder;
             TreeNode leftChild = new TreeNode(preorder[preStart + 1]);
             TreeNode rightChild = new TreeNode(preorder[preStart + leftTreeSize + 1]);
             node.left = leftChild;
