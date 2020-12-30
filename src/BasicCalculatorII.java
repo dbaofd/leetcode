@@ -1,14 +1,9 @@
-import java.util.Stack;
-
 /**
- * Created by dbaofd on 2020/12/30.
+ * Created by dbaofd on 2020/12/31.
  */
-
-// This calculator algorithm is written in 2015, I tried so hard to finish this algorithm.
-// Even though the algorithm is not that efficient. The idea of it is not bad. It is based on the state machine.
-public class BasicCalculator {
-    //    Runtime: 92 ms, faster than 6.92% of Java online submissions for Basic Calculator.
-//    Memory Usage: 58.2 MB, less than 5.26% of Java online submissions for Basic Calculator.
+public class BasicCalculatorII {
+//    Runtime: 158 ms, faster than 5.00% of Java online submissions for Basic Calculator II.
+//    Memory Usage: 57.8 MB, less than 5.03% of Java online submissions for Basic Calculator II.
     private int pointer;/*类似c语言的全局变量，用来代替指针*/
     public int MaxCharNum = 2000000;//最多支持运算的表达式字符数
 
@@ -32,7 +27,6 @@ public class BasicCalculator {
             return 1;
         else return 0;
     }
-
     private char Precede(char a, char b) {
         //判断运算符的优先级，a为操作符栈中的运算符，b为将要进入操作符栈中的运算符
         int i = 0, j = 0;
@@ -40,7 +34,7 @@ public class BasicCalculator {
                 /*运算符之间的优先级制作成一张表格*/
                 {'>', '>', '>', '>', '>'},
                 {'<', '<', '>', '>', '>'},
-                {'<', '<', '>', '>', '>'},
+                {'<', '<', '>', '<', '>'},
                 {'<', '<', '<', '<', '>'},
                 {'>', '>', '>', '>', '<'},
         };
@@ -80,7 +74,6 @@ public class BasicCalculator {
         }
         return pre[i][j];
     }
-
     public stack transform(String zz) {//将中缀表达式转换成后缀表达式
         stack ex = new stack();//ex是用来存放后缀值的堆栈，fu是用来存放操作符的堆栈
         stack fu = new stack();
@@ -90,7 +83,7 @@ public class BasicCalculator {
         fu.top = -1;
         //flag = 0;
         zz = zz.replaceAll("\\s*", "");
-        zz = zz + "=";
+        zz=zz+"=";
         for (i = 0; i < zz.length(); i++) {
             if (zz.charAt(i) >= '0' && zz.charAt(i) <= '9' || zz.charAt(i) == '.') {//是数字直接入后缀值栈
                 ex.data[++ex.top] = zz.charAt(i);
@@ -147,7 +140,6 @@ public class BasicCalculator {
         return ex;//将最后得到的后缀值栈返回
         //ps:之所以将遇到'=','(',')'三种情况放在调用Precede之前，是因为避免这三个运算符和其他运算符进行优先级比较
     }
-
     private int readnumber(char f[]) {//将后缀值栈中的数由字符型转化成double型
         int x = 0;
         int k = 0;
@@ -186,25 +178,25 @@ public class BasicCalculator {
             else if (f[pointer] == '+') {
                 x2 = obst[--top];
                 x1 = obst[--top];
-                obst[top] = x1 + x2;
+                obst[top] = x1+x2;
                 top++;
                 pointer++;
             } else if (f[pointer] == '-') {
                 x2 = obst[--top];
                 x1 = obst[--top];
-                obst[top] = x1 - x2;
+                obst[top] = x1-x2;
                 top++;
                 pointer++;
             } else if (f[pointer] == '*') {
                 x2 = obst[--top];
                 x1 = obst[--top];
-                obst[top] = x1 * x2;
+                obst[top] = x1*x2;
                 top++;
                 pointer++;
             } else if (f[pointer] == '/') {
                 x2 = obst[--top];
                 x1 = obst[--top];
-                obst[top] = x1 / x2;
+                obst[top] = x1/x2;
                 top++;
                 pointer++;
             }
@@ -214,9 +206,9 @@ public class BasicCalculator {
     }
 
     public int calculate(String s) {
-        stack myStack;
+        stack myStack = new stack();
         myStack = transform(s);
-        int result = evalpost(myStack.data);
+        int result=evalpost(myStack.data);
         return result;
     }
 }
