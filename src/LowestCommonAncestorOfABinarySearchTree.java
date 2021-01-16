@@ -22,3 +22,4 @@ public class LowestCommonAncestorOfABinarySearchTree {
         return result;
     }
 }
+
